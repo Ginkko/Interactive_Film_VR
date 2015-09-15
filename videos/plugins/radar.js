@@ -1,4 +1,7 @@
-/* krpano 1.18.4 radar plugin (build 2015-04-23) */
+/*
+	krpano 1.19-pr2 Radar Plugin (build 2015-05-08)
+	http://krpano.com/plugins/radar/
+*/
 var krpanoplugin=function(){function y(b){q=!0;m(b);c.mouse&&(window.addEventListener("mousemove",m,!0),window.addEventListener("mouseup",j,!0));c.touch&&(window.addEventListener(c.touchmove,m,!0),window.addEventListener(c.touchcancel,j,!0),window.addEventListener(c.touchend,j,!0))}function j(){c.mouse&&(window.removeEventListener("mousemove",m,!0),window.removeEventListener("mouseup",j,!0));c.touch&&(window.removeEventListener(c.touchmove,m,!0),window.removeEventListener(c.touchcancel,j,!0),window.removeEventListener(c.touchend,
 j,!0))}function m(b){if(null==f)j(b);else if(null!=g){b&&(b.preventDefault(),b.stopImmediatePropagation(),b.stopPropagation());var a,d=a=0,e=g.svg.parentNode.getBoundingClientRect();c.touch?(b=b.changedTouches?b.changedTouches:[b],0<b.length&&(d=b[0],a=Math.round(d.clientX-e.left),d=Math.round(d.clientY-e.top))):(a=Math.round(b.clientX-e.left),d=Math.round(b.clientY-e.top));a=180*Math.atan2(d-0.5*z*f.stagescale,a-0.5*A*f.stagescale)/Math.PI;a-=n;if(!0==q)B=a-Number(f.view.hlookat),q=!1;else{for(a-=
 B;180<a;)a-=360;for(;-180>a;)a+=360;f.view.hlookat=a}h=!0}}function C(){var b=l/2*f.stagescale;2E3<b&&(b=2E3);var a=Math.ceil(2*b),c=2+2*p+a;if(c!=D){D=c;var e=g.svg;e.setAttribute("width",c);e.setAttribute("height",c);e.style.left=(a-c>>1)+"px";e.style.top=(a-c>>1)+"px";h=!0}a=n+r-0+f.view.hlookat;e=f.view.hfov;s&&(e=-e);d&&d.sprite&&(d.sprite.style.pointerEvents="none");var k=g.path.style;k.pointerEvents=d.enabled?"visiblePainted":"none";k.cursor=d.handcursor?"pointer":"default";if(0.01<Math.abs(a-

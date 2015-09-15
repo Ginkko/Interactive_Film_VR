@@ -1,4 +1,7 @@
-/* krpano 1.18.4 combobox plugin (build 2015-04-23) */
+/*
+	krpano 1.19-pr2 Combobox Plugin (build 2015-05-08)
+	http://krpano.com/plugins/combobox/
+*/
 var krpanoplugin=function(){function A(a,b,c,e,f){var d=null;f=(!0===f?"remove":"add")+"EventListener";var g=k.browser.events;if(g.touch&&("down"==b?d=g.touchstart:"move"==b?d=g.touchmove:"up"==b&&(d=g.touchend),d))a[f](d,c,e);if(g.mouse&&("down"==b?d="mousedown":"move"==b?d="mousemove":"up"==b&&(d="mouseup"),d))a[f](d,c,e)}function xa(a){for(;0<G.length&&!(100>=a-G[0].time);)G.shift()}function Pa(a){A(window,"up",ya,!0);A(window,"move",za,!0);G=[];var b=a.changedTouches&&0<a.changedTouches.length?
 a.changedTouches[0].pageY:a.pageY;P=!1;ca=b;ha=q;a.preventDefault();a.stopPropagation();setTimeout(function(){if(!1==P&&a.target){var b=a.target._krpcbitemindex;if(void 0!==b&&(Aa(),0<=b&&b<z.count&&(b=z.getItem(b))&&b._htmlid)){var c=document.getElementById(b._htmlid);c&&(Q=b,R=c,c.style.color=Ba,c.style.backgroundImage=k.safari||k.chrome||k.androidstock?"-webkit-gradient(linear, 0% 5%, 0% 80%, from(rgba("+X+",1.0)), to(rgba("+Y+",1.0)))":k.ie?"-ms-linear-gradient(top, rgba("+X+",1.0), rgba("+Y+
 ",1.0))":k.firefox?"-moz-linear-gradient(top, rgba("+X+",1.0), rgba("+Y+",1.0))":"linear-gradient(to bottom, rgba("+X+",1.0), rgba("+Y+",1.0))")}}},100);return!1}function Aa(){R&&(R.style.color=ia,R.style.backgroundImage="");R=Q=null}function za(a){var b=a.changedTouches&&0<a.changedTouches.length?a.changedTouches[0].pageY:a.pageY;!1==P&&5<Math.abs(b-ca)&&(null!=S&&(clearInterval(S),S=null),P=!0,Aa(),ca=b,ha=q);if(P){var c=a.timeStamp;xa(c);G.push({time:c,y:b});q=ha+(b-ca);b=-(ja-(n-T));q-=(0<q?q:
