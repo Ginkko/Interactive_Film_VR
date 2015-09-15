@@ -1,0 +1,65 @@
+<krpano version="1.18" bgcolor="0x000000">
+
+	<!-- the videoplayer interface skin -->
+
+	<!-- include the videoplayer plugin and load the video (use a low res video for iOS) -->
+	<plugin name="video"
+	        url.flash="%SWFPATH%/plugins/videoplayer.swf"
+	        url.html5="%SWFPATH%/plugins/videoplayer.js"
+          videourl.no-ios="stjohns.mp4"
+	        pausedonstart="false"
+	        loop="true"
+	        enabled="false"
+	        zorder="0"
+	        align="center" ox="0" oy="0"
+
+	        width.no-panovideosupport="100%"
+	        height.no-panovideosupport="prop"
+
+	        onloaded="videointerface_setup_interface(get(name)); setup_video_controls();"
+	        onvideoready="videointerface_videoready();"
+	        />
+
+
+	<!-- custom control setup - add items for selecting videos with a different resolution/quality -->
+	<action name="setup_video_controls">
+		<!-- add  items to the control menu of the videointerface skin -->
+		videointerface_addmenuitem(configmenu, vqtitle, 'Select Video Quality', true, videointerface_toggle_configmenu() );
+		videointerface_addmenuitem(configmenu, q1, '1024x512',  false, change_video_file(q1, 'video-1024x512.mp4|video-1024x512.webm'); );
+		videointerface_addmenuitem(configmenu, q2, '1920x960',  false, change_video_file(q2, 'video-1920x960.mp4|video-1920x960.webm'); );
+
+		<!-- select/mark the current video (see the initial videourl attribute) -->
+		if(device.ios,
+			videointerface_selectmenuitem(configmenu, q1);
+		  ,
+			videointerface_selectmenuitem(configmenu, q2);
+		  );
+	</action>
+
+
+	<!-- change the video file, but try keeping the same playback position -->
+	<action name="change_video_file">
+		plugin[video].playvideo('%CURRENTXML%/%2', null, get(plugin[video].ispaused), get(plugin[video].time));
+		videointerface_deselectmenuitem(configmenu, q1);
+		videointerface_deselectmenuitem(configmenu, q2);
+		videointerface_selectmenuitem(configmenu, %1);
+	</action>
+
+
+	<!-- the panoramic video image -->
+	<image devices="panovideosupport">
+		<sphere url="plugin:video" />
+	</image>
+
+
+	<!-- set the default view - a light fisheye projection -->
+	<view hlookat="0" vlookat="0" fovtype="DFOV" fov="130" fovmin="75" fovmax="150" fisheye="0" />
+
+	<hotspot name="spot" url="lol.jpg" distorted="true" ath="0" atv="0" scale="1.0" rx="0" ry="0" rz="0" zorder="1" onover="set(hotspot[spot_over].visible,true); tween(hotspot[spot_over].alpha,1,0.5,default);" onout="tween(hotspot[spot_over].alpha,0,0.5,default, set(hotspot[spot_over].visible,false));" onclick="looktohotspot(get(name), 60);"/>
+	<hotspot name="spot_over" url="ugu.png" zorder="2" visible="false" enabled="false" alpha="0" onloaded="copyhotspotsettingsfrom(spot);"/>
+	<action name="copyhotspotsettingsfrom">
+	copy(distorted, hotspot[%1].distorted); copy(ath, hotspot[%1].ath); copy(atv, hotspot[%1].atv); copy(scale, hotspot[%1].scale); copy(rx, hotspot[%1].rx); copy(ry, hotspot[%1].ry); copy(rz, hotspot[%1].rz);
+	</action>
+
+
+</krpano>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>krpano test</title>
+    <script src="embedpano.js"></script>
+  </head>
+  <body>
+
+    <div id="pano" style="width:600px; height:400px;"></div>
+    <script>
+      embedpano({swf:"videos/krpano.swf", xml:"videos/video1.xml", target:"pano"});
+      function loadpano(xmlname)
+      {
+        var krpano = document.getElementById("krpanoSWFObject");
+        krpano.call("loadpano(" + xmlname + ", null, MERGE, BLEND(0.5));");
+      }
+    </script>
+
+    <button type="button" id="loadVideo1" onclick="loadpano('video1.xml');">Load Video #1</button>
+
+  </body>
+</html>
